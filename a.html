@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.16/svg.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    .svg-container {
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="svg-container"></div>
+  <script>
+    const drawWeek = (draw, y, chaos, skipDays = 0, stopBefore = 7) => {
+      for (let i = skipDays; i < stopBefore; i++) {
+        let x = 50 + i * 40;
+        const rect = draw.rect(40, 40)
+          .x(x).y(y)
+          .fill('rgba(0,0,0,0)')
+          .stroke({ color: 'black', width: 2 })
+          .transform({
+            rotate: 0 + Math.floor(Math.random() * 90 - 45) * chaos,
+            translateX: 0 + Math.floor(Math.random() * 40 - 20) * chaos,
+            // translateY: 100,
+            // scale: 3
+          })
+      }
+    }
+    const draw = SVG().addTo('.svg-container').size(400, 900)
+    draw.text('March').font({
+      family: 'Helvetica',
+      size: 30,
+      weight: 700,
+    }).x(60);
+
+    drawWeek(draw, 50, 0.05, 6);
+    drawWeek(draw, 90, 0.1);
+    drawWeek(draw, 130, 0.15);
+    drawWeek(draw, 170, 0.2);
+    drawWeek(draw, 210, 0.25);
+    drawWeek(draw, 250, 0.3, 0, 2);
+
+    draw.text('April').font({
+      family: 'Helvetica',
+      size: 30,
+      weight: 700
+    }).x(60).y(320);
+    drawWeek(draw, 370, 0.32, 2);
+    drawWeek(draw, 410, 0.37);
+    drawWeek(draw, 450, 0.41);
+    drawWeek(draw, 490, 0.46);
+    drawWeek(draw, 520, 0.5, 0, 4);
+
+    draw.text('May').font({
+      family: 'Helvetica',
+      size: 30,
+      weight: 700
+    }).x(60).y(590);
+    drawWeek(draw, 640, 0.6, 4);
+    drawWeek(draw, 680, 0.65);
+    drawWeek(draw, 720, 0.7);
+    drawWeek(draw, 760, 0.8);
+    drawWeek(draw, 800, 0.9);
+  </script>
+</body>
+</html>
